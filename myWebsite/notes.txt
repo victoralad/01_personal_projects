@@ -2,3 +2,10 @@
 
 Line break '<br>' #to move to the next line
 Padding: top, right, bottom, left (clockwise)
+
+
+
+
+
+#########  To do  ###########
+How to make sure the page on the nav bar shows indicates what page one is on. 

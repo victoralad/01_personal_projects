@@ -1,11 +1,14 @@
 body{
     margin: 0;
+    background-image: url("../images/snow-home.jpg");
+    background-size: cover;
+    background-repeat: repeat-x;
 }
 
 header{
-    background: #999;
+    background: #444;
     color: white;
-    padding: 5px 15px 0 15px;
+    padding: 5px 15px 2px 15px;
 }
 
 header h1{
@@ -13,11 +16,21 @@ header h1{
     display: inline;
 }
 
+header h2{
+    margin: 0;
+    display: inline-block;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-style: italic;
+    font-size: 14px;
+    align-items: center;
+    padding: 5px 15px 0px 15px;
+}
+
 nav ul{
     margin: 0;
     padding: 0 0 0 15px;  
-    display: inline-block;  
-    /* float: right; */
+    /* display: inline-block;   */
+    float: right;
     
 }
 
@@ -30,24 +43,34 @@ nav ul li{
      
 }
 
+
 nav ul li a{
     color: white;
 }
 
-.row {
-    clear: both;
+nav ul li:hover{
+    background-color: #777;
 }
 
-.col {
-    background: #333;
-    border-radius: 5px;
-    color: white;
-    padding: .5%;
-    float: left;
-    margin: .5%;
-    width: 31%
+.content{
+    max-width: 100%;
+    max-height: 100%;
+}
+
+img{
+    margin: 5px;
+    border-radius: 50%;
+}
+
+.main{
+    height: auto;
 }
 
 footer {
     clear: both;
+    background: #333;
+    color: white;
+    padding: 5px 15px 2px 15px;
+    position: bottom;
+    text-align: center
 }
