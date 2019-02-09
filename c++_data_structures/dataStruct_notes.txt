@@ -1,0 +1,2 @@
+
+# The time complexity of linkedList is worse than arrays, but linkedList has a better space complexity.
