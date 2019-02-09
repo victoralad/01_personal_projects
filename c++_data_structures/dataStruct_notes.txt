@@ -1,2 +1,3 @@
 
-# The time complexity of linkedList is worse than arrays, but linkedList has a better space complexity.
+# The time complexity of linkedList is worse than arrays in most cases, but linkedList has a better space complexity.
+# Fragmentation faults can occur with arrays when trying to create large contigious blocks of memory that are not possible. 
