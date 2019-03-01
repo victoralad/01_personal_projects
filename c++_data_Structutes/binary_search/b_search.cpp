@@ -1,22 +1,8 @@
-#include <iostream>
-template <class T> 
-class b_search{
-    int size;
-    bool found;
-    int mid, left, right;
-    T* array;
-    //T leftArray[], rightArray[];
-public:
-    b_search(T arrayIn[], int sizeIn);
-    ~b_search();
-    int search(T number, T arr[]);
-    
-    
-};
+#include "b_search.hpp"
 
 template <typename T> 
 b_search<T>::b_search(T arrayIn[], int sizeIn){
-    std::cout << "Constructor initiated\n";
+    std::cout << "Constructor initiated...\n\n";
     array = arrayIn;
     size = sizeIn;
     left = 0;
@@ -25,7 +11,7 @@ b_search<T>::b_search(T arrayIn[], int sizeIn){
 
 template <typename T> 
 b_search<T>::~b_search(){
-    std::cout << "Destructor called, program ended\n";
+    std::cout << "...Destructor called, program ended\n";
 }
 
 
@@ -71,7 +57,6 @@ int b_search<T>::search(T number, T arr[]){
 
     if(left < right){
         mid = left + (right - left)/2;
-        std::cout << left << " " << right << " " << mid << "\n";
         if(array[mid] > number){
             T leftArray[mid];
             right = mid;
@@ -92,13 +77,13 @@ int b_search<T>::search(T number, T arr[]){
 
         else{
             found = true;
-            std::cout << "The number can be found at position: " << mid + 1 << "\n";
+            std::cout << "The number can be found at position: " << mid + 1 << "\n\n";
         }
     }
     
     else{
         found = false;
-        std::cout << "The number is not in the list\n";
+        std::cout << "The number is not in the list\n\n";
     }
 }
 //RRTs, A*
