@@ -39,8 +39,14 @@ void Singly_LL<T>::insert_node_at(int position, T dataIn){
 
     
     if(position == 1 && head != NULL){
+        std::cout << dataIn << " has been added to the head of the list\n\n";
         new_Node->next = head;
         head = new_Node;
+        size++;
+    }
+    else if(position == 0){
+        std::cout << "The requested insert position is invalid\n";
+        std::cout << "Valid positions start at index 1\n\n";
     }
     else {
         if((position - size) == 1){
@@ -86,14 +92,13 @@ void Singly_LL<T>::add_node(T dataIn){
 //remove a node from the end of the list
 template <typename T> 
 void Singly_LL<T>::delete_node(){
-    std::cout << "Trying to delete a node...\n";
     
     //std::cout << "size "<< size << std::endl;
     if(!head){
         empty();
     }
     else if(head->next == NULL){
-        std:: cout << head->data << " which is the head node, has been removed from the list \n";
+        std:: cout << head->data << " which is the head node, has been removed from the list... \n";
         delete head;
         head = NULL;
         size--;
@@ -108,7 +113,7 @@ void Singly_LL<T>::delete_node(){
             //std::cout << "size "<< prev->data << std::endl;
             temp_size--;
         }
-        std:: cout << temp->data <<" which is the tail node, has been removed from the list \n";
+        std:: cout << temp->data <<" which is the tail node, has been removed from the list... \n";
         prev->next = temp->next;
         delete temp;
         temp =  NULL;
@@ -136,6 +141,35 @@ void Singly_LL<T>::delete_node_at(int position){
     }
     std::cout << "\n";
     
+}
+
+//prints the data at a ficed position in the list
+template <typename T> 
+void Singly_LL<T>::print_node(int position){
+    //std::cout << "Printing items in list...\n";
+    if(!head){
+        empty();
+    }
+    else if(position == 0){
+        std::cout << "The requested print position is invalid\n";
+        std::cout << "Valid positions start at index 1\n\n";
+    }
+    else{
+        if ((position - size) > 0){
+            std::cout << "The requested print position is invalid\n";
+            std::cout << "The size of the list is "<< size << "\n\n";
+        }
+        else{
+            Node<T>* temp = head; //for transversing the list
+            std::cout << "ho\n";
+            for(int i = 1; i < position; i++){
+                temp = temp->next;     
+            }
+            std::cout << "The value at position " << position << " is " << temp->data << " ...\n\n";
+        }
+    }
+    
+    std::cout <<"\n";
 }
 
 //prints the data in each node of the list
