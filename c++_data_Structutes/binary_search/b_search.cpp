@@ -2,11 +2,12 @@
 
 template <typename T> 
 b_search<T>::b_search(T arrayIn[], int sizeIn){
-    std::cout << "Constructor initiated...\n\n";
+    std::cout << "Constructor initiated...\n";
     array = arrayIn;
     size = sizeIn;
     left = 0;
     right = size;
+    std::cout << "The list has "<< size << " elements" << "\n\n";
 }
 
 template <typename T> 
@@ -77,7 +78,8 @@ int b_search<T>::search(T number, T arr[]){
 
         else{
             found = true;
-            std::cout << "The number can be found at position: " << mid + 1 << "\n\n";
+            std::cout << "The number can be found at position: " << mid + 1 << std::endl;
+            std::cout << "Please note: this program does not tell you the frequency of occurrence of the number" << "\n\n";
         }
     }
     

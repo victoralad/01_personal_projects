@@ -1,28 +1,12 @@
 #include <iostream>
 #include "singly_LL.hpp"
 
-class Singly_LL{
-    Node* head;
-    int size;
-public:
-    Singly_LL(Node* start = NULL);
-    ~Singly_LL();
-    void insert_node_at(int position, int dataIn);
-    void add_node(double dataIn);
-    void delete_node_at(int positionIn = -1);
-    void delete_node();
-    void print_list();
-    void print_node(int position);
-    int size_of_list();
-    bool is_empty();
-    void empty();
 
-    // non generic functions on list
-    void sort_list(bool ascending = true);
-};
+
 
 // default constructor 
-Singly_LL::Singly_LL(Node* start){
+template <typename T> 
+Singly_LL<T>::Singly_LL(Node<T>* start){
     head = start;
     std::cout << "------------------------------------" << std::endl;
     std::cout << "Initializing List...\n" << std::endl;
@@ -35,8 +19,11 @@ Singly_LL::Singly_LL(Node* start){
 }
 
 //destructor
-Singly_LL::~Singly_LL(){
-    delete head; 
+template <typename T> 
+Singly_LL<T>::~Singly_LL(){
+    if (head != NULL){
+        delete head; 
+    }
     std::cout <<"\n";
     std::cout <<"'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''\n\n\n";
     std::cout << "------------------------------------" << std::endl;
@@ -44,16 +31,49 @@ Singly_LL::~Singly_LL(){
     std::cout << "------------------------------------" << std::endl;
 }
 
+//add node at a particular position
+template <typename T>
+void Singly_LL<T>::insert_node_at(int position, T dataIn){
+    Node<T>* new_Node = new Node<T>;
+    new_Node->data = dataIn; 
+
+    
+    if(position == 1 && head != NULL){
+        new_Node->next = head;
+        head = new_Node;
+    }
+    else {
+        if((position - size) == 1){
+        add_node(dataIn);
+        }
+        else if ((position - size) > 1){
+            std::cout << "The requested insert position is invalid\n";
+            std::cout << "The size of the list is "<< size << "\n\n";
+        }
+        else{
+            Node<T>* temp = head; //for transversing the list
+            for(int i = 1; i < position - 1; i++){
+                temp = temp->next;     
+            }
+            new_Node->next = temp->next;
+            temp->next = new_Node; 
+            size++;
+            std::cout << dataIn << " added to the list at position " << position << " ...\n\n";
+        }
+    }
+}
+
 //add a node to the end of the list
-void Singly_LL::add_node(double dataIn){
-    Node* new_Node = new Node();
+template <typename T> 
+void Singly_LL<T>::add_node(T dataIn){
+    Node<T>* new_Node = new Node<T>;
     new_Node->data = dataIn; 
     if(!head){
         head = new_Node;
         size++;
     }
     else{
-        Node* temp = head; //for transversing the list
+        Node<T>* temp = head; //for transversing the list
         while(temp->next != NULL){
             temp = temp->next;     
         }
@@ -64,41 +84,44 @@ void Singly_LL::add_node(double dataIn){
 }
 
 //remove a node from the end of the list
-void Singly_LL::delete_node(){
+template <typename T> 
+void Singly_LL<T>::delete_node(){
     std::cout << "Trying to delete a node...\n";
-    Node* temp = head;
-    Node* prev;
+    
     //std::cout << "size "<< size << std::endl;
     if(!head){
         empty();
     }
-    else if(temp->next == NULL){
-        std:: cout << temp->data << " which is the head node, has been removed from the list \n";
-        delete temp;
-        temp = NULL;
+    else if(head->next == NULL){
+        std:: cout << head->data << " which is the head node, has been removed from the list \n";
+        delete head;
+        head = NULL;
         size--;
     }
     else{   
         int temp_size = size;
+        Node<T>* temp = head;
+        Node<T>* prev;
         while(temp->next){
             prev = temp;
             temp = temp->next;
-            std::cout << "size "<< prev->data << std::endl;
+            //std::cout << "size "<< prev->data << std::endl;
             temp_size--;
         }
-        
+        std:: cout << temp->data <<" which is the tail node, has been removed from the list \n";
+        prev->next = temp->next;
         delete temp;
         temp =  NULL;
-        std:: cout << prev->data <<" which is the tail node, has been removed from the list \n";
         size--;
     }
      std::cout << "\n";
 }
-void Singly_LL::delete_node_at(int positionIn){
-    Node* temp = head;
-    Node* prev;
-    if(positionIn <= size){
-        for(int i = 0; i < positionIn; i++){
+template <typename T> 
+void Singly_LL<T>::delete_node_at(int position){
+    Node<T>* temp = head;
+    Node<T>* prev;
+    if(position <= size){
+        for(int i = 0; i < position; i++){
             prev = temp;
             temp = temp->next;
         }
@@ -109,20 +132,21 @@ void Singly_LL::delete_node_at(int positionIn){
     }
     else{
         std::cout << "The size of the list is less than the index given...\n";
-        size_of_list();
+        std::cout << "The size of the list is "<< size << "\n\n";
     }
     std::cout << "\n";
     
 }
 
 //prints the data in each node of the list
-void Singly_LL::print_list(){
+template <typename T> 
+void Singly_LL<T>::print_list(){
     std::cout << "Printing items in list...\n";
     if(!head){
         empty();
     }
     else{
-        Node* temp = head;
+        Node<T>* temp = head;
         int temp_size = size;
         while(temp_size){
             std::cout << temp->data << std::endl;
@@ -133,14 +157,15 @@ void Singly_LL::print_list(){
     std::cout <<"\n";
 }
 // check how many nodes are in the list
-int Singly_LL::size_of_list(){
+template <typename T> 
+int Singly_LL<T>::size_of_list(){
     std::cout << "Checking the size of the list...\n...";
     if(!head){
         empty();
         size = 0;
     }
     else{        
-        Node* temp = head;
+        Node<T>* temp = head;
         int temp_size = 1;
         while(temp->next != NULL){
             temp = temp->next;
@@ -153,7 +178,8 @@ int Singly_LL::size_of_list(){
 }
 
 //checks if the node is empty
-bool Singly_LL::is_empty(){
+template <typename T> 
+bool Singly_LL<T>::is_empty(){
     std::cout << "Checking if list is empty...\n...";
     if(!head){
         empty();
@@ -166,6 +192,7 @@ bool Singly_LL::is_empty(){
 }
 
 // simply prints out the words "List is empty"
-void Singly_LL::empty(){
+template <typename T> 
+void Singly_LL<T>::empty(){
     std::cout << "List is empty\n" << std::endl;
 }
