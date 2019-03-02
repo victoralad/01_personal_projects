@@ -98,20 +98,17 @@ void Singly_LL<T>::delete_node(){
         empty();
     }
     else if(head->next == NULL){
-        std:: cout << head->data << " which is the head node, has been removed from the list... \n";
+        std:: cout << head->data << " which is the only node, has been removed from the list... \n";
         delete head;
         head = NULL;
         size--;
     }
     else{   
-        int temp_size = size;
         Node<T>* temp = head;
         Node<T>* prev;
         while(temp->next){
             prev = temp;
             temp = temp->next;
-            //std::cout << "size "<< prev->data << std::endl;
-            temp_size--;
         }
         std:: cout << temp->data <<" which is the tail node, has been removed from the list... \n";
         prev->next = temp->next;
@@ -125,21 +122,47 @@ template <typename T>
 void Singly_LL<T>::delete_node_at(int position){
     Node<T>* temp = head;
     Node<T>* prev;
-    if(position <= size){
-        for(int i = 0; i < position; i++){
-            prev = temp;
-            temp = temp->next;
-        }
-        prev = temp->next;
-        temp =  NULL;
-        delete temp;
-        size--;
+    if(!head){
+        empty();
     }
     else{
-        std::cout << "The size of the list is less than the index given...\n";
-        std::cout << "The size of the list is "<< size << "\n\n";
+        if(position == 0){
+            std::cout << "The requested delete position is invalid\n";
+            std::cout << "Valid positions start at index 1\n\n";
+        }
+        else if(position == 1){
+            if (head->next == NULL){
+                delete_node();
+            }
+            else{
+                std:: cout << head->data << " which is the head node, has been removed from the list... \n";
+                head = temp->next;
+                delete temp;
+                size--;
+            } 
+        }
+        else{
+            if(position < size){
+                for(int i = 1; i < position; i++){
+                    prev = temp;
+                    temp = temp->next;
+                }
+                std::cout << temp->data << " has been deleted from the list at position " << position << "\n\n";
+                prev->next = temp->next;
+                delete temp;
+                temp =  NULL;
+                size--;
+            }
+            else if(position == size){
+                delete_node();
+            }
+            else{
+                std::cout << "The requested delete position is invalid\n";
+                std::cout << "The size of the list is "<< size << "\n\n";
+            }
+            std::cout << "\n";
+        }
     }
-    std::cout << "\n";
     
 }
 
@@ -161,7 +184,6 @@ void Singly_LL<T>::print_node(int position){
         }
         else{
             Node<T>* temp = head; //for transversing the list
-            std::cout << "ho\n";
             for(int i = 1; i < position; i++){
                 temp = temp->next;     
             }
