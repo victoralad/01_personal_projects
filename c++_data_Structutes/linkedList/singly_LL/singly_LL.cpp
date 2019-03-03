@@ -23,6 +23,7 @@ template <typename T>
 Singly_LL<T>::~Singly_LL(){
     if (head != NULL){
         delete head; 
+        head = NULL;
     }
     std::cout <<"\n";
     std::cout <<"'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''\n\n\n";
@@ -138,6 +139,7 @@ void Singly_LL<T>::delete_node_at(int position){
                 std:: cout << head->data << " which is the head node, has been removed from the list... \n";
                 head = temp->next;
                 delete temp;
+                temp = NULL;
                 size--;
             } 
         }

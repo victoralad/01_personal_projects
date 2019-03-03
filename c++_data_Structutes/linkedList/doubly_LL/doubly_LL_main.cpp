@@ -1,4 +1,4 @@
-#include "singly_LL.cpp"
+#include "doubly_LL.cpp"
 
 int main(){
 
@@ -10,7 +10,7 @@ int main(){
     list.insert_node_at(2, 7);
     list.is_empty();
     list.print_list();
-    list.delete_node_at(5);
+    list.delete_node_at(1);
     list.print_list();
     list.delete_node();
     list.size_of_list();

@@ -1,5 +1,5 @@
 #include <iostream>
-#include "singly_LL.hpp"
+#include "doubly_LL.hpp"
 
 
 
@@ -23,6 +23,7 @@ template <typename T>
 Singly_LL<T>::~Singly_LL(){
     if (head != NULL){
         delete head; 
+        head = NULL;
     }
     std::cout <<"\n";
     std::cout <<"'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''\n\n\n";
@@ -84,6 +85,7 @@ void Singly_LL<T>::add_node(T dataIn){
             temp = temp->next;     
         }
         temp->next = new_Node; 
+        new_Node->prev = temp;
         size++;
     }
     std::cout << dataIn << " added to the end of the list...\n\n";
@@ -105,13 +107,16 @@ void Singly_LL<T>::delete_node(){
     }
     else{   
         Node<T>* temp = head;
-        Node<T>* prev;
+        Node<T>* previous;
         while(temp->next){
-            prev = temp;
+            previous = temp;
             temp = temp->next;
         }
         std:: cout << temp->data <<" which is the tail node, has been removed from the list... \n";
-        prev->next = temp->next;
+        previous->next = temp->next;
+        if(temp->next){
+            temp->next->prev = previous;
+        }
         delete temp;
         temp =  NULL;
         size--;
@@ -121,7 +126,7 @@ void Singly_LL<T>::delete_node(){
 template <typename T> 
 void Singly_LL<T>::delete_node_at(int position){
     Node<T>* temp = head;
-    Node<T>* prev;
+    Node<T>* previous;
     if(!head){
         empty();
     }
@@ -138,17 +143,19 @@ void Singly_LL<T>::delete_node_at(int position){
                 std:: cout << head->data << " which is the head node, has been removed from the list... \n";
                 head = temp->next;
                 delete temp;
+                temp = NULL;
                 size--;
             } 
         }
         else{
             if(position < size){
                 for(int i = 1; i < position; i++){
-                    prev = temp;
+                    previous = temp;
                     temp = temp->next;
                 }
                 std::cout << temp->data << " has been deleted from the list at position " << position << "\n\n";
-                prev->next = temp->next;
+                previous->next = temp->next;
+                temp->next->prev = previous;
                 delete temp;
                 temp =  NULL;
                 size--;
