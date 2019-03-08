@@ -1,5 +1,5 @@
 #include <iostream>
-#include "singly_LL.hpp"
+#include "doubly_LL.hpp"
 
 
 
@@ -45,7 +45,7 @@ void Singly_LL<T>::insert_node_at(int position, T dataIn){
         head = new_Node;
         size++;
     }
-    else if(position <= 0){
+    else if(position == 0){
         std::cout << "The requested insert position is invalid\n";
         std::cout << "Valid positions start at index 1\n\n";
     }
@@ -85,6 +85,7 @@ void Singly_LL<T>::add_node(T dataIn){
             temp = temp->next;     
         }
         temp->next = new_Node; 
+        new_Node->prev = temp;
         size++;
     }
     std::cout << dataIn << " added to the end of the list...\n\n";
@@ -106,13 +107,16 @@ void Singly_LL<T>::delete_node(){
     }
     else{   
         Node<T>* temp = head;
-        Node<T>* prev;
+        Node<T>* previous;
         while(temp->next){
-            prev = temp;
+            previous = temp;
             temp = temp->next;
         }
         std:: cout << temp->data <<" which is the tail node, has been removed from the list... \n";
-        prev->next = temp->next;
+        previous->next = temp->next;
+        if(temp->next){
+            temp->next->prev = previous;
+        }
         delete temp;
         temp =  NULL;
         size--;
@@ -122,12 +126,12 @@ void Singly_LL<T>::delete_node(){
 template <typename T> 
 void Singly_LL<T>::delete_node_at(int position){
     Node<T>* temp = head;
-    Node<T>* prev;
+    Node<T>* previous;
     if(!head){
         empty();
     }
     else{
-        if(position <= 0){
+        if(position == 0){
             std::cout << "The requested delete position is invalid\n";
             std::cout << "Valid positions start at index 1\n\n";
         }
@@ -146,11 +150,12 @@ void Singly_LL<T>::delete_node_at(int position){
         else{
             if(position < size){
                 for(int i = 1; i < position; i++){
-                    prev = temp;
+                    previous = temp;
                     temp = temp->next;
                 }
                 std::cout << temp->data << " has been deleted from the list at position " << position << "\n\n";
-                prev->next = temp->next;
+                previous->next = temp->next;
+                temp->next->prev = previous;
                 delete temp;
                 temp =  NULL;
                 size--;
@@ -175,7 +180,7 @@ void Singly_LL<T>::print_node(int position){
     if(!head){
         empty();
     }
-    else if(position <= 0){
+    else if(position == 0){
         std::cout << "The requested print position is invalid\n";
         std::cout << "Valid positions start at index 1\n\n";
     }

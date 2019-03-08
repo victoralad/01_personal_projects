@@ -45,7 +45,7 @@ void Singly_LL<T>::insert_node_at(int position, T dataIn){
         head = new_Node;
         size++;
     }
-    else if(position == 0){
+    else if(position <= 0){
         std::cout << "The requested insert position is invalid\n";
         std::cout << "Valid positions start at index 1\n\n";
     }
@@ -131,7 +131,7 @@ void Singly_LL<T>::delete_node_at(int position){
         empty();
     }
     else{
-        if(position == 0){
+        if(position <= 0){
             std::cout << "The requested delete position is invalid\n";
             std::cout << "Valid positions start at index 1\n\n";
         }
@@ -180,7 +180,7 @@ void Singly_LL<T>::print_node(int position){
     if(!head){
         empty();
     }
-    else if(position == 0){
+    else if(position <= 0){
         std::cout << "The requested print position is invalid\n";
         std::cout << "Valid positions start at index 1\n\n";
     }
