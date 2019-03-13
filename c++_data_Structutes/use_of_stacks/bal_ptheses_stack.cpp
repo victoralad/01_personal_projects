@@ -1,6 +1,8 @@
 #include <bits/stdc++.h> 
 using namespace std;
 
+int len = 0;
+
 bool balanced(char* parIn, int sizeIn){
     stack<char> S;
     for(int i=0; i<sizeIn; i++){
@@ -33,6 +35,19 @@ bool balanced(char* parIn, int sizeIn){
         }
     }
     return S.empty();
+}
+
+bool bal_recursion(char* parIn, int sizeIn){
+    
+    if(len == sizeIn){
+        return true;
+    }
+    else{
+        char temp = parIn[len];
+        
+        bal_recursion(parIn, sizeIn);
+        len++;
+    }
 }
 
 int main(){

@@ -1,15 +1,15 @@
-#ifndef SINGLY_LIST_H
-#define SINGLY_LIST_H
+#ifndef Doubly_LIST_H
+#define Doubly_LIST_H
 
 #include "node.hpp"
 
 template <class T> 
-class Singly_LL{
+class Doubly_LL{
     Node<T>* head;
     int size;
 public:
-    Singly_LL(Node<T>* start = NULL);
-    ~Singly_LL();
+    Doubly_LL(Node<T>* start = NULL);
+    ~Doubly_LL();
     void insert_node_at(int position, T dataIn); 
     void add_node(T dataIn);  //
     void delete_node_at(int position = -1);
@@ -19,6 +19,9 @@ public:
     int size_of_list(); 
     bool is_empty(); //
     void empty();  //
+    void reverse();
+    void recursive_rev_list();
+    void recursive_rev(Node<T>* temp);
 
     // non generic functions on list
     void sort_list(bool ascending = true);

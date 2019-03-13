@@ -6,7 +6,7 @@
 
 // default constructor 
 template <typename T> 
-Singly_LL<T>::Singly_LL(Node<T>* start){
+Doubly_LL<T>::Doubly_LL(Node<T>* start){
     head = start;
     std::cout << "------------------------------------" << std::endl;
     std::cout << "Initializing List...\n" << std::endl;
@@ -20,7 +20,7 @@ Singly_LL<T>::Singly_LL(Node<T>* start){
 
 //destructor
 template <typename T> 
-Singly_LL<T>::~Singly_LL(){
+Doubly_LL<T>::~Doubly_LL(){
     if (head != NULL){
         delete head; 
         head = NULL;
@@ -34,7 +34,7 @@ Singly_LL<T>::~Singly_LL(){
 
 //add node at a particular position
 template <typename T>
-void Singly_LL<T>::insert_node_at(int position, T dataIn){
+void Doubly_LL<T>::insert_node_at(int position, T dataIn){
     Node<T>* new_Node = new Node<T>;
     new_Node->data = dataIn; 
 
@@ -72,7 +72,7 @@ void Singly_LL<T>::insert_node_at(int position, T dataIn){
 
 //add a node to the end of the list
 template <typename T> 
-void Singly_LL<T>::add_node(T dataIn){
+void Doubly_LL<T>::add_node(T dataIn){
     Node<T>* new_Node = new Node<T>;
     new_Node->data = dataIn; 
     if(!head){
@@ -93,7 +93,7 @@ void Singly_LL<T>::add_node(T dataIn){
 
 //remove a node from the end of the list
 template <typename T> 
-void Singly_LL<T>::delete_node(){
+void Doubly_LL<T>::delete_node(){
     
     //std::cout << "size "<< size << std::endl;
     if(!head){
@@ -124,7 +124,7 @@ void Singly_LL<T>::delete_node(){
      std::cout << "\n";
 }
 template <typename T> 
-void Singly_LL<T>::delete_node_at(int position){
+void Doubly_LL<T>::delete_node_at(int position){
     Node<T>* temp = head;
     Node<T>* previous;
     if(!head){
@@ -175,7 +175,7 @@ void Singly_LL<T>::delete_node_at(int position){
 
 //prints the data at a ficed position in the list
 template <typename T> 
-void Singly_LL<T>::print_node(int position){
+void Doubly_LL<T>::print_node(int position){
     //std::cout << "Printing items in list...\n";
     if(!head){
         empty();
@@ -203,7 +203,7 @@ void Singly_LL<T>::print_node(int position){
 
 //prints the data in each node of the list
 template <typename T> 
-void Singly_LL<T>::print_list(){
+void Doubly_LL<T>::print_list(){
     std::cout << "Printing items in list...\n";
     if(!head){
         empty();
@@ -221,7 +221,7 @@ void Singly_LL<T>::print_list(){
 }
 // check how many nodes are in the list
 template <typename T> 
-int Singly_LL<T>::size_of_list(){
+int Doubly_LL<T>::size_of_list(){
     std::cout << "Checking the size of the list...\n...";
     if(!head){
         empty();
@@ -242,7 +242,7 @@ int Singly_LL<T>::size_of_list(){
 
 //checks if the node is empty
 template <typename T> 
-bool Singly_LL<T>::is_empty(){
+bool Doubly_LL<T>::is_empty(){
     std::cout << "Checking if list is empty...\n...";
     if(!head){
         empty();
@@ -256,6 +256,56 @@ bool Singly_LL<T>::is_empty(){
 
 // simply prints out the words "List is empty"
 template <typename T> 
-void Singly_LL<T>::empty(){
+void Doubly_LL<T>::empty(){
     std::cout << "List is empty\n" << std::endl;
 }
+
+//reverses list iteratively
+template <typename T> 
+void Doubly_LL<T>::reverse(){
+
+    if(!head){
+        std::cout << "Reversing an empty list is not possible" << "\n\n";
+
+    }
+    else{
+        Node<T> *previous, *current, *temp_next;
+        current = head;
+        previous = NULL;
+        while(current != NULL){
+            temp_next = current->next;
+            current->next = previous;
+            current->prev = temp_next;
+            previous = current;
+            current = temp_next;
+        }
+        head = previous;
+    }
+    
+}
+
+//helper function to recursively reverse list  
+template <typename T> 
+void Doubly_LL<T>::recursive_rev_list(){
+    Node<T>* temp = head;
+    recursive_rev(temp); 
+}
+
+//reverses list recursively
+template <typename T> 
+void Doubly_LL<T>::recursive_rev(Node<T>* temp){
+    if(!head){
+        std::cout << "Reversing an empty list is not possible" << "\n\n";
+    }
+    else{
+        if(temp->next == NULL){
+            head = temp;
+            return;
+        }
+        else{
+            recursive_rev(temp->next);
+            Node<T>* q_temp = temp->next;
+            q_temp->next = temp;
+        }
+    }
+} 

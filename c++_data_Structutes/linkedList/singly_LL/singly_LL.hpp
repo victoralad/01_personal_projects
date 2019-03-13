@@ -19,6 +19,9 @@ public:
     int size_of_list(); //
     bool is_empty(); //
     void empty();  //
+    void reverse();
+    void recursive_rev_list();
+    void recursive_rev(Node<T>* temp);
 
     // non generic functions on list
     void sort_list(bool ascending = true);

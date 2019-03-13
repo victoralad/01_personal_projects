@@ -254,3 +254,53 @@ template <typename T>
 void Singly_LL<T>::empty(){
     std::cout << "List is empty\n" << std::endl;
 }
+
+//reverses list iteratively
+template <typename T> 
+void Singly_LL<T>::reverse(){
+    if(!head){
+        std::cout << "Reversing an empty list is not possible" << "\n\n";
+
+    }
+    else{
+        Node<T> *previous, *current, *temp_next;
+        current = head;
+        previous = NULL;
+        while(current != NULL){
+            temp_next = current->next;
+            current->next = previous;
+            previous = current;
+            current = temp_next;
+        }
+        head = previous;
+    }
+    
+}
+
+//helper function to recursively reverse list  
+template <typename T> 
+void Singly_LL<T>::recursive_rev_list(){
+    Node<T>* temp = head;
+    recursive_rev(temp); 
+}
+
+//reverses list recursively
+template <typename T> 
+void Singly_LL<T>::recursive_rev(Node<T>* temp){
+    if(!head){
+        std::cout << "Reversing an empty list is not possible" << "\n\n";
+    }
+    else{
+        if(temp->next == NULL){
+            head = temp;
+            return;
+        }
+        else{
+            recursive_rev(temp->next);
+            Node<T>* q_temp = temp->next;
+            q_temp->next = temp;
+            temp->next = NULL;
+        }
+    }
+    
+} 
