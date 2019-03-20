@@ -1,3 +1,6 @@
 
 # The time complexity of linkedList is worse than arrays in most cases, but linkedList has a better space complexity.
 # Fragmentation faults can occur with arrays when trying to create large contigious blocks of memory that are not possible. 
+# It seems almost any algorithm that can be written with stacks, can also be written with recursion. 
+# Stacks can be used to check for balanced parenthesis. It can also be used to reverse a string or linkedList
+# Queues can be use to perform level-order traversal of trees.

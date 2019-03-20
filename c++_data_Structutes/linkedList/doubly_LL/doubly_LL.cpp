@@ -305,7 +305,9 @@ void Doubly_LL<T>::recursive_rev(Node<T>* temp){
         else{
             recursive_rev(temp->next);
             Node<T>* q_temp = temp->next;
+            q_temp->prev = q_temp->next;
             q_temp->next = temp;
+            temp->next = NULL;
         }
     }
 } 
